@@ -1,3 +1,4 @@
+
 class PizzasController < ApplicationController
   def index
     Commands::GetPizzas.run do |pizzas|
@@ -6,9 +7,14 @@ class PizzasController < ApplicationController
   end
 
   def create
-    Commands::CreatePizza.run(pizza: pizza_params) do |pizza|
-      render json: pizza.to_json
+    command = Commands::CreatePizza.new
+    command.on Commands::CreatePizza::SUCCESS do |pizza|
+      render(json: pizza.to_json)
     end
+    command.on Commands::CreatePizza::ERROR do |errors|
+      render(json: errors.to_json, status: 422)
+    end
+    command.call(pizza: params[:pizza])
   end
 
   private

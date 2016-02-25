@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'rom'
+gem 'dry-data'
+gem 'dry-validation'
+
 gem 'pg'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'

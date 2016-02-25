@@ -2,9 +2,9 @@ require "rails_helper"
 
 RSpec.describe "Toppings Controller", :type => :request do
   let!(:pizza) do
-    Commands::CreatePizza.run({pizza: {name: "Belleboche"}}) do |pizza|
-      return pizza
-    end
+    p = Commands::CreatePizza.new.call({pizza: {name: "Belleboche"}})
+    p p
+    p
   end
 
   let!(:topping) do
